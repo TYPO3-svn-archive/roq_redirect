@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="nl" datatype="plaintext" original="messages" date="2013-10-04T16:10:37Z" product-name="roq_redirect">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_roqredirect_domain_model_redirect">
+				<source>Redirect</source>
+				<target>Redirect</target>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.redirect_url">
+				<source>Redirect url</source>
+				<target>Redirect url</target>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.redirect_to">
+				<source>Redirect to</source>
+				<target>Redirect naar</target>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.http_code">
+				<source>HTTP Status</source>
+				<target>HTTP Status</target>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.code301">
+                <source>Moved Permanently (301)</source>
+                <target>Permanent verplaatst (301)</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.code302">
+                <source>Found (302)</source>
+                <target>Gevonden (302)</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.code303">
+                <source>See other (303)</source>
+                <target>Zie andere (303)</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.code307">
+                <source>Temporary Redirect (307)</source>
+                <target>Tijdelijk verplaatst (307)</target>
+            </trans-unit>
+
+		</body>
+	</file>
+</xliff>

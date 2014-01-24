@@ -1,0 +1,14 @@
+module.tx_roqredirect {
+	view {
+		# cat=module.tx_roqredirect/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:roq_redirect/Resources/Private/Backend/Templates/
+		# cat=module.tx_roqredirect/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:roq_redirect/Resources/Private/Backend/Partials/
+		# cat=module.tx_roqredirect/file; type=string; label=Path to template layouts (BE)
+		layoutRootPath = EXT:roq_redirect/Resources/Private/Backend/Layouts/
+	}
+	persistence {
+		# cat=module.tx_roqredirect//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-10-04T16:10:37Z" product-name="roq_redirect">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_roqredirect_domain_model_redirect">
+				<source>Redirect</source>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.redirect_url">
+				<source>redirectUrl</source>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.redirect_to">
+				<source>redirectTo</source>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.http_code">
+				<source>httpCode</source>
+			</trans-unit>
+			<trans-unit id="tx_roqredirect_domain_model_redirect.select_site">
+                <source>Select Site: </source>
+            </trans-unit>
+            <trans-unit id="fluid.template.createRedirect">
+                <source>Add a redirect</source>
+            </trans-unit>
+            <trans-unit id="fluid.template.redirectManagement">
+                <source>Redirect management</source>
+            </trans-unit>
+
+
+			
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,11 @@
+# Module configuration
+module.tx_roqredirect {
+	persistence {
+		storagePid = {$module.tx_roqredirect.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_roqredirect.view.templateRootPath}
+		partialRootPath = {$module.tx_roqredirect.view.partialRootPath}
+		layoutRootPath = {$module.tx_roqredirect.view.layoutRootPath}
+	}
+}

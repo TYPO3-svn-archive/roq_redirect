@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-10-04T16:10:37Z" product-name="roq_redirect">
+		<header/>
+		<body>
+
+			<trans-unit id="redirect_url.description">
+				<source>The url after current domain. Example: "test" -> http://www.domain.com/test</source>
+				<target>De url na het domein. Voorbeeld: "test" -> "http://www.domein.com/test"</target>
+			</trans-unit>
+			<trans-unit id="redirect_to.description">
+				<source>The target page after redirect</source>
+                <target>De bestemmingspagina van redirect</target>
+			</trans-unit>
+			<trans-unit id="http_code.description">
+				<source>The HTTP Status of redirect</source>
+				<target>De HTTP Status van redirect</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

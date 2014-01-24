@@ -1,0 +1,25 @@
+{namespace r=ROQUIN\RoqRedirect\ViewHelpers}
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+Resources:
+Private:
+Templates:
+List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+    <f:if condition="{domains->f:count()} > 0">
+        <f:for each="{domains}" as="domain">
+            <f:if condition="{domain.uid} == {selectedDomain.uid}">
+                <r:be.tableList tableName="tx_roqredirect_domain_model_redirect" fieldList="{0: 'redirect_to', 1: 'redirect_url' 2: 'http_code' 3: 'sys_language_uid'}" storagePid="{domain.pid}" recordsPerPage="10000" sortField="redirect_url" sortDescending="false" clickTitleMode="edit" alternateBackgroundColors="true">
+                </r:be.tableList>
+            </f:if>
+        </f:for>
+    </f:if>
+</f:section>

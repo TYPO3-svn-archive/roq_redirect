@@ -1,0 +1,15 @@
+config.tx_extbase{
+    persistence{
+        classes{
+
+            ROQUIN\RoqRedirect\Domain\Model\Domain {
+                mapping {
+                    tableName = sys_domain
+                    columns {
+                        domainName.mapOnProperty = domainName
+                    }
+                }
+            }
+    	}
+    }
+}
