@@ -48,7 +48,8 @@ namespace ROQUIN\RoqRedirect\ViewHelpers\Be\Menus;
  * localized selectbox
  * <output>
  */
-class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
+class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+{
 
     /**
      * @var string
@@ -67,14 +68,14 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
      */
     public function render($label, $controller, $action, array $arguments = array()) {
         $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->reset()->uriFor($action, $arguments, $controller);
+        $uri        = $uriBuilder->reset()->uriFor($action, $arguments, $controller);
         $this->tag->addAttribute('value', $uri);
-        $currentRequest = $this->controllerContext->getRequest();
+        $currentRequest    = $this->controllerContext->getRequest();
         $currentController = $currentRequest->getControllerName();
-        $currentAction = $currentRequest->getControllerActionName();
+        $currentAction     = $currentRequest->getControllerActionName();
 
         if ($action === $currentAction && $controller === $currentController) {
-            if($arguments['domain'] === $arguments['selectedDomain']){
+            if ($arguments['domain'] === $arguments['selectedDomain']) {
                 $this->tag->addAttribute('selected', 'selected');
             }
         }

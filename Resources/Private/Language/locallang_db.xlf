@@ -16,17 +16,43 @@
 			<trans-unit id="tx_roqredirect_domain_model_redirect.http_code">
 				<source>HTTP Status</source>
 			</trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.additional_url">
+                <source>Additional params</source>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.external_url">
+                <source>External url</source>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.internal_file">
+                <source>File</source>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type">
+                <source>Redirect to</source>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.counter">
+                <source>Total hits</source>
+            </trans-unit>
+
 			<trans-unit id="tx_roqredirect_domain_model_redirect.code301">
                 <source>Moved Permanently (301)</source>
             </trans-unit>
             <trans-unit id="tx_roqredirect_domain_model_redirect.code302">
-                <source>Found (302)</source>
+                <source>Moved temporarily (302)</source>
             </trans-unit>
             <trans-unit id="tx_roqredirect_domain_model_redirect.code303">
-                <source>See other (303)</source>
+                <source>See other location (303)</source>
             </trans-unit>
             <trans-unit id="tx_roqredirect_domain_model_redirect.code307">
                 <source>Temporary Redirect (307)</source>
+            </trans-unit>
+
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type.0">
+                <source>Internal page</source>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type.1">
+                <source>External url</source>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type.2">
+                <source>Internal file</source>
             </trans-unit>
 
 		</body>

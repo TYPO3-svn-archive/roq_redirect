@@ -25,9 +25,25 @@
             <trans-unit id="fluid.template.redirectManagement">
                 <source>Redirect management</source>
             </trans-unit>
+            <trans-unit id="fluid.template.noAuthorization">
+                <source>You are not authorized for any site</source>
+            </trans-unit>
+            <trans-unit id="warning.head.urlAlreadyExist">
+                <source>Url already exist</source>
+            </trans-unit>
+            <trans-unit id="warning.messagePart1.urlAlreadyExist">
+                <source>The url: </source>
+            </trans-unit>
+            <trans-unit id="warning.messagePart2.urlAlreadyExist">
+                <source> already exist. With this redirect you override this request. If this is not desirable then change the redirect url.</source>
+            </trans-unit>
+            <trans-unit id="warning.head.noBaseUrl">
+                <source>BaseURL</source>
+            </trans-unit>
+            <trans-unit id="warning.message.noBaseUrl">
+                <source>No BaseURL defined</source>
+            </trans-unit>
 
-
-			
 		</body>
 	</file>
 </xliff>

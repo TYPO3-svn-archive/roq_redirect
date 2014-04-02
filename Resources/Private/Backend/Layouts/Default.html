@@ -4,12 +4,14 @@
 	<div class="typo3-fullDoc">
 		<div id="typo3-docheader">
 			<div id="typo3-docheader-row1">
-				<div class="buttonsleft">
-                    <r:be.buttons.icon uri="#" icon="actions-document-new" title="{f:translate(key: 'fluid.template.createRedirect')}" onclick="window.location.href='alt_doc.php?returnUrl='+T3_THIS_LOCATION+'&edit[tx_roqredirect_domain_model_redirect][{selectedDomain.pid}]=new'; return false;" />
-				</div>
-				<div class="buttonsright">
-					<f:be.buttons.shortcut />
-				</div>
+                <f:if condition="{domains->f:count()} > 0">
+                    <div class="buttonsleft">
+                        <r:be.buttons.icon uri="#" icon="actions-document-new" title="{f:translate(key: 'fluid.template.createRedirect')}" onclick="window.location.href='alt_doc.php?returnUrl='+T3_THIS_LOCATION+'&edit[tx_roqredirect_domain_model_redirect][{selectedDomain.pid}]=new'; return false;" />
+                    </div>
+                    <div class="buttonsright">
+                        <f:be.buttons.shortcut />
+                    </div>
+                </f:if>
 			</div>
 			<div id="typo3-docheader-row2">
 				<div class="docheader-row2-left">

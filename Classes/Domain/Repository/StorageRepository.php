@@ -1,5 +1,5 @@
 <?php
-namespace ROQUIN\RoqRedirect\Domain\Model;
+namespace ROQUIN\RoqRedirect\Domain\Repository;
 
     /***************************************************************
      *  Copyright notice
@@ -31,33 +31,21 @@ namespace ROQUIN\RoqRedirect\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Domain extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class StorageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     /**
-     * domainName
-     *
-     * @var \string
+     * @param array $fileRecord
+     * @return array|NULL
      */
-    protected $domainName;
+    public function getStorageByFile($fileRecord) {
+        $storageRecord = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow(
+            '*',
+            'sys_file_storage',
+            "uid = " . (int)$fileRecord['storage']
+        );
 
-    /**
-     * Returns the domainName
-     *
-     * @return \string $domainName
-     */
-    public function getDomainName() {
-        return $this->domainName;
-    }
-
-    /**
-     * Sets the domainName
-     *
-     * @param \string $domainName
-     * @return void
-     */
-    public function setDomainName($domainName) {
-        $this->domainName = $domainName;
+        return $storageRecord;
     }
 }
 

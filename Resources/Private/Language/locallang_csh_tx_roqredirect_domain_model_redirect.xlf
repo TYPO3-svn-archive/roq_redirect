@@ -13,6 +13,12 @@
 			<trans-unit id="http_code.description">
 				<source>The HTTP Status of redirect</source>
 			</trans-unit>
+            <trans-unit id="additional_url.description">
+                <source>Add additional params to the url for linking inside a html page for example.</source>
+            </trans-unit>
+            <trans-unit id="type.description">
+                <source>Choose the type of the redirect</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

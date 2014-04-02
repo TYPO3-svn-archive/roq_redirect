@@ -4,7 +4,7 @@ namespace ROQUIN\RoqRedirect\Utility;
     /***************************************************************
      * Copyright notice
      *
-     * (c) 2013 Patrick Wiggelman <patrick@roquin.nl>
+     * (c) 2014 Patrick Wiggelman <patrick@roquin.nl>
      * All rights reserved
      *
      * This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,6 @@ namespace ROQUIN\RoqRedirect\Utility;
      * This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
 
-
 /**
  * Utility Class for Http
  *
@@ -33,7 +32,8 @@ namespace ROQUIN\RoqRedirect\Utility;
  * @subpackage roq_redirect
  */
 
-class Http {
+class Http
+{
 
     const HTTP_STATUS_301 = 'HTTP/1.1 301 Moved Permanently';
     const HTTP_STATUS_302 = 'HTTP/1.1 302 Found';
@@ -44,7 +44,7 @@ class Http {
      * Get the HTTP Status
      *
      * @param int $httpStatus
-     * return string $httpStatus
+     * @return string $httpStatus
      */
     public static function getHttpStatus($httpStatus = 301) {
         switch ($httpStatus) {
@@ -65,6 +65,17 @@ class Http {
         return $httpStatus;
     }
 
+    /**
+     * Redirect
+     *
+     * @param   string $url
+     * @param   string $httpStatus
+     */
+    public static function redirect($url, $httpStatus = self::HTTP_STATUS_301) {
+        header(Http::getHttpStatus($httpStatus));
+        header('Location: ' . \TYPO3\CMS\Core\Utility\GeneralUtility::locationHeaderUrl($url));
+        exit();
+    }
 }
 
 ?>

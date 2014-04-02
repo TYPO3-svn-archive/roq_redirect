@@ -1,5 +1,5 @@
 <?php
-namespace ROQUIN\RoqRedirect\Hooks;
+namespace ROQUIN\RoqRedirect\Utility;
 
     /***************************************************************
      * Copyright notice
@@ -25,26 +25,19 @@ namespace ROQUIN\RoqRedirect\Hooks;
      ***************************************************************/
 
 /**
- * Hook into pre process request for redirecting
+ * Utility Class for Redirect
  *
  * @author Patrick Wiggelman <patrick@roquin.nl>
  * @package TYPO3
  * @subpackage roq_redirect
  */
 
-class PreprocessRequest
+class RedirectType
 {
 
-    /**
-     * Redirect if request matches a redirect record
-     *
-     * @return void
-     */
-    public function preprocessRequest() {
-        /** @var \ROQUIN\RoqRedirect\Controller\RedirectController $redirectController */
-        $redirectController = new \ROQUIN\RoqRedirect\Controller\RedirectController;
-        $redirectController->doRedirectIfExist();
-    }
+    const INTERNAL_PAGE = 0;
+    const EXTERNAL_URL  = 1;
+    const INTERNAL_FILE = 2;
 }
 
 ?>

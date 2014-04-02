@@ -25,6 +25,7 @@
 .. --------------------------------------------------
 
 .. _http://forge.typo3.org/projects/extension-roq_redirect: http://forge.typo3.org/projects/extension-roq_redirect
-.. _http://forge.typo3.org/projects/extension-roq_newsevent/issues: http://forge.typo3.org/projects/extension-roq_newsevent/issues
+.. _http://forge.typo3.org/projects/extension-roq_redirect/issues: http://forge.typo3.org/projects/extension-roq_redirect/issues
 .. _https://svn.typo3.org/TYPO3v4/Extensions/roq_redirect: https://svn.typo3.org/TYPO3v4/Extensions/roq_redirect
-.. _http://forge.typo3.org/projects/extension-roq_newsevent/roadmap: http://forge.typo3.org/projects/extension-roq_newsevent/roadmap
+.. _http://forge.typo3.org/projects/extension-roq_redirect/roadmap: http://forge.typo3.org/projects/extension-roq_redirect/roadmap
+.. _http://www.roquin.nl/roq-redirect/: http://www.roquin.nl/roq-redirect/

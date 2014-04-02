@@ -44,7 +44,8 @@ namespace ROQUIN\RoqRedirect\ViewHelpers\Be;
  * Clicking on a username will open the TYPO3 info popup for the respective record
  * </output>
  */
-class TableListViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper {
+class TableListViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
+{
 
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
@@ -81,30 +82,30 @@ class TableListViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
     public function render($tableName, array $fieldList = array(), $storagePid = NULL, $levels = 0, $filter = '', $recordsPerPage = 0, $sortField = '', $sortDescending = FALSE, $readOnly = FALSE, $enableClickMenu = TRUE, $clickTitleMode = NULL, $alternateBackgroundColors = FALSE) {
         $pageinfo = \TYPO3\CMS\Backend\Utility\BackendUtility::readPageAccess(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('id'), $GLOBALS['BE_USER']->getPagePermsClause(1));
         /** @var \TYPO3\CMS\Recordlist\RecordList\DatabaseRecordList $dblist */
-        $dblist = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Recordlist\\RecordList\\DatabaseRecordList');
+        $dblist           = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Recordlist\\RecordList\\DatabaseRecordList');
         $dblist->backPath = $GLOBALS['BACK_PATH'];
-        $dblist->pageRow = $pageinfo;
+        $dblist->pageRow  = $pageinfo;
 
         if ($readOnly === FALSE) {
             $dblist->calcPerms = $GLOBALS['BE_USER']->calcPerms($pageinfo);
         }
 
         $dblist->disableSingleTableView = TRUE;
-        $dblist->clickTitleMode = $clickTitleMode;
-        $dblist->alternateBgColors = $alternateBackgroundColors;
+        $dblist->clickTitleMode         = $clickTitleMode;
+        $dblist->alternateBgColors      = $alternateBackgroundColors;
 
         if ($storagePid === NULL) {
             $frameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-            $storagePid = $frameworkConfiguration['persistence']['storagePid'];
+            $storagePid             = $frameworkConfiguration['persistence']['storagePid'];
         }
 
-        $dblist->start($storagePid, $tableName, (integer) \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('pointer'), $filter, $levels, $recordsPerPage);
-        $dblist->allFields = TRUE;
+        $dblist->start($storagePid, $tableName, (integer)\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('pointer'), $filter, $levels, $recordsPerPage);
+        $dblist->allFields     = TRUE;
         $dblist->displayFields = FALSE;
-        $dblist->setFields = array($tableName => $fieldList);
-        $dblist->sortField = $sortField;
-        $dblist->sortRev = $sortDescending;
-        $dblist->script = $_SERVER['REQUEST_URI'];
+        $dblist->setFields     = array($tableName => $fieldList);
+        $dblist->sortField     = $sortField;
+        $dblist->sortRev       = $sortDescending;
+        $dblist->script        = $_SERVER['REQUEST_URI'];
         $dblist->generateList();
 
         return $dblist->HTMLcode;

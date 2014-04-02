@@ -16,6 +16,14 @@
 				<source>The HTTP Status of redirect</source>
 				<target>De HTTP Status van redirect</target>
 			</trans-unit>
+            <trans-unit id="additional_url.description">
+                <source>Add additional params to the url for linking inside a page.</source>
+                <target>Voeg additionele parameters toe aan url voor het linken naar een specifiek onderdeel binnen een pagina.</target>
+            </trans-unit>
+            <trans-unit id="type.description">
+                <source>Choose the type of the redirect</source>
+                <target>Kies type redirect</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

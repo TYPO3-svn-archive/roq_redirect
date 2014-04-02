@@ -11,5 +11,10 @@ Project information
 
 - **General information** about the project can be found at `http://forge.typo3.org/projects/extension-roq_redirect`_
 - **Source code** of the project at `https://svn.typo3.org/TYPO3v4/Extensions/roq_redirect`_
-- **Issue tracker** can be found at `http://forge.typo3.org/projects/extension-roq_newsevent/issues`_
-- **Roadmap** for changes at `http://forge.typo3.org/projects/extension-roq_newsevent/roadmap`_
+- **Issue tracker** can be found at `http://forge.typo3.org/projects/extension-roq_redirect/issues`_
+- **Roadmap** for changes at `http://forge.typo3.org/projects/extension-roq_redirect/roadmap`_
+
+Donate
+==========
+
+- `http://www.roquin.nl/roq-redirect/`_

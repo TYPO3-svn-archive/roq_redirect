@@ -20,21 +20,55 @@
 				<source>HTTP Status</source>
 				<target>HTTP Status</target>
 			</trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.additional_url">
+                <source>Additional params</source>
+                <target>Additionele parameters</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.external_url">
+                <source>External url</source>
+                <target>Externe url</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.internal_file">
+                <source>File</source>
+                <target>Bestand</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type">
+                <source>Redirect to</source>
+                <target>Redirect naar</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.counter">
+                <source>Total hits</source>
+                <target>Aantal keer bezocht</target>
+            </trans-unit>
+
 			<trans-unit id="tx_roqredirect_domain_model_redirect.code301">
                 <source>Moved Permanently (301)</source>
                 <target>Permanent verplaatst (301)</target>
             </trans-unit>
             <trans-unit id="tx_roqredirect_domain_model_redirect.code302">
-                <source>Found (302)</source>
-                <target>Gevonden (302)</target>
+                <source>Moved temporarily (302)</source>
+                <target>Tijdelijk verplaatst (302)</target>
             </trans-unit>
             <trans-unit id="tx_roqredirect_domain_model_redirect.code303">
-                <source>See other (303)</source>
-                <target>Zie andere (303)</target>
+                <source>See other location (303)</source>
+                <target>Zie andere locatie (303)</target>
             </trans-unit>
             <trans-unit id="tx_roqredirect_domain_model_redirect.code307">
                 <source>Temporary Redirect (307)</source>
-                <target>Tijdelijk verplaatst (307)</target>
+                <target>Tijdelijk redirect (307)</target>
+            </trans-unit>
+
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type.0">
+                <source>Internal page</source>
+                <target>Interne pagina</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type.1">
+                <source>External url</source>
+                <target>Externe url</target>
+            </trans-unit>
+            <trans-unit id="tx_roqredirect_domain_model_redirect.type.2">
+                <source>Internal file</source>
+                <target>Interne bestand</target>
             </trans-unit>
 
 		</body>

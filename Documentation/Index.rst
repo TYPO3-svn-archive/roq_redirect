@@ -44,10 +44,10 @@ Redirect url (roq_redirect)
         extension@roquin.nl
 
     :Creation:
-        2014-01-24
+        2014-04-03
 
     :Generation:
-        16:00
+        17:00
 
     :Licence:
         Open Content License available from `www.opencontent.org/opl.shtml <http://www.opencontent.org/opl.shtml>`_
@@ -63,3 +63,4 @@ Redirect url (roq_redirect)
 	UserManual/Index
 	AdministratorManual/Index
 	ProjectInformation/Index
+	ChangeLog/Index

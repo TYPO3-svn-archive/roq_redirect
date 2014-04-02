@@ -32,7 +32,30 @@
                 <source>Redirect management</source>
                 <target>Redirect beheer</target>
             </trans-unit>
-
+            <trans-unit id="fluid.template.noAuthorization">
+                <source>You are not authorized for any site. Or no domain records set.</source>
+                <target>U bent niet geautoriseerd voor een site. Of er zijn geen domain records aangemaakt.</target>
+            </trans-unit>
+            <trans-unit id="warning.head.urlAlreadyExist">
+                <source>Url already exist</source>
+                <target>Url bestaat al</target>
+            </trans-unit>
+            <trans-unit id="warning.messagePart1.urlAlreadyExist">
+                <source>The url: </source>
+                <target>De url: </target>
+            </trans-unit>
+            <trans-unit id="warning.messagePart2.urlAlreadyExist">
+                <source> already exist. With this redirect you override this request. This can be a normal TYPO3 page. If this is not desirable then change the redirect url.</source>
+                <target> bestaat al. Met deze redirect overschrijf je de bestaande aanvraag. Dit kan een bestaande TYPO3 pagina zijn. Als dit niet wenselijk is, wijzig dan je redirect url.</target>
+            </trans-unit>
+            <trans-unit id="warning.head.noBaseUrl">
+                <source>BaseURL</source>
+                <target>BaseURL</target>
+            </trans-unit>
+            <trans-unit id="warning.message.noBaseUrl">
+                <source>No BaseURL defined</source>
+                <target>Geen BaseURL gedefinieerd</target>
+            </trans-unit>
 
 		</body>
 	</file>

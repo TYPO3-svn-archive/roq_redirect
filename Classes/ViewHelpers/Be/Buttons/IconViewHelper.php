@@ -41,7 +41,8 @@ namespace ROQUIN\RoqRedirect\ViewHelpers\Be\Buttons;
  * This time the "actions-document-new" icon is returned, the button has the title attribute set and links to the "new" action of the current controller.
  * </output>
  */
-class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper {
+class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
+{
 
     /**
      * Renders an icon link as known from the TYPO3 backend
@@ -55,7 +56,7 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
     public function render($uri, $icon = 'actions-document-close', $title = '', $onclick = '') {
         $link = '<a href="' . $uri . '">' . \TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIcon($icon, array('title' => $title)) . '</a>';
 
-        if($onclick){
+        if ($onclick) {
             $link = '<a href="' . $uri . '" onclick="' . $onclick . '">' . \TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIcon($icon, array('title' => $title)) . '</a>';
         }
 

@@ -15,11 +15,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="content">
     <f:if condition="{domains->f:count()} > 0">
-        <f:for each="{domains}" as="domain">
-            <f:if condition="{domain.uid} == {selectedDomain.uid}">
-                <r:be.tableList tableName="tx_roqredirect_domain_model_redirect" fieldList="{0: 'redirect_to', 1: 'redirect_url' 2: 'http_code' 3: 'sys_language_uid'}" storagePid="{domain.pid}" recordsPerPage="10000" sortField="redirect_url" sortDescending="false" clickTitleMode="edit" alternateBackgroundColors="true">
-                </r:be.tableList>
-            </f:if>
-        </f:for>
+        <f:then>
+            <f:for each="{domains}" as="domain">
+                <f:if condition="{domain.uid} == {selectedDomain.uid}">
+                    <r:be.tableList tableName="tx_roqredirect_domain_model_redirect" fieldList="{0: 'redirect_url' 1: 'sys_language_uid'}" storagePid="{domain.pid}" recordsPerPage="10000" sortField="redirect_url" sortDescending="false" clickTitleMode="edit" alternateBackgroundColors="true">
+                    </r:be.tableList>
+                </f:if>
+            </f:for>
+        </f:then>
+        <f:else>
+            {f:translate(key: 'fluid.template.noAuthorization')}
+        </f:else>
     </f:if>
 </f:section>

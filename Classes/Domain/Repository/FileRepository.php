@@ -1,5 +1,5 @@
 <?php
-namespace ROQUIN\RoqRedirect\Domain\Model;
+namespace ROQUIN\RoqRedirect\Domain\Repository;
 
     /***************************************************************
      *  Copyright notice
@@ -31,33 +31,28 @@ namespace ROQUIN\RoqRedirect\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Domain extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class FileRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     /**
-     * domainName
+     * Get the file record by redirect object
      *
-     * @var \string
+     * @param \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect
+     * @return array|NULL
      */
-    protected $domainName;
+    public function getFileByRedirect($redirect) {
+        $fileRecord = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow(
+            'f.*',
+            'sys_file as f, sys_file_reference as r',
+            "r.tablenames = 'tx_roqredirect_domain_model_redirect'
+            AND r.fieldname = 'internal_file'
+            AND f.uid = r.uid_local
+            AND r.hidden = 0
+            AND r.deleted = 0
+            AND r.uid_foreign = " . (int)$redirect->getId()
+        );
 
-    /**
-     * Returns the domainName
-     *
-     * @return \string $domainName
-     */
-    public function getDomainName() {
-        return $this->domainName;
-    }
-
-    /**
-     * Sets the domainName
-     *
-     * @param \string $domainName
-     * @return void
-     */
-    public function setDomainName($domainName) {
-        $this->domainName = $domainName;
+        return $fileRecord;
     }
 }
 

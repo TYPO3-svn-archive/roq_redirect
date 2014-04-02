@@ -9,6 +9,11 @@ CREATE TABLE tx_roqredirect_domain_model_redirect (
 	redirect_url varchar(255) DEFAULT '' NOT NULL,
 	redirect_to varchar(255) DEFAULT '' NOT NULL,
 	http_code int(11) DEFAULT '0' NOT NULL,
+	type varchar(100) NOT NULL DEFAULT '0',
+	external_url varchar(255) DEFAULT '' NOT NULL,
+  internal_file int(11) unsigned DEFAULT '0' NOT NULL,
+  additional_url varchar(255) DEFAULT '' NOT NULL,
+  counter int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
