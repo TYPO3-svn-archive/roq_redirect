@@ -77,10 +77,9 @@ class ActionMenuViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagB
     /**
      * Render FunctionMenu
      *
-     * @param string $defaultController
      * @return string
      */
-    public function render($defaultController = NULL) {
+    public function render() {
         $this->tag->addAttribute('onchange', 'jumpToUrl(this.options[this.selectedIndex].value, this);');
         $options = '';
 

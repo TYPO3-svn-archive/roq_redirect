@@ -28,10 +28,10 @@ Features
 -----------
 
 * Redirect to internal page, external url or internal file
-* Counter for total hits of the redirect
-* Add additional params for linking inside a part of the internal website page
-* Automatic authorization per site for editors based on mounts
-* Warning if redirect source url already exist
+* Redirect hit counter
+* Support for anchor linking
+* Checks per-site editor authorization in back-end based on db mounts
+* Checks if a redirect source url already exists
 
 Background
 -----------

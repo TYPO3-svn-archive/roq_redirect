@@ -11,13 +11,16 @@ Users manual
 
 Target group: **Editors**
 
-Redirect records
+Manage redirect records
 -----------
+Redirects are configurable with the redirect backend module in the TYPO3 backend. Just select the Redirects module in the backend of TYPO3. If
+you have a multisite environment than you will have multiple options of sites to select. Choose and select the site you want to add redirects
+to (see also image 2). The selected site is the base url of the redirect. For example: You select the site *"sub.patrick.typo62.lan"* and add
+a redirect of the type *"Internal Page"* with the same data as image 3 "Redrect type Internal Page" (see also image 3). The url
+http://sub.patrick.typo62.lan/custom will redirect to http://sub.patrick.typo62.lan/de/customizing.html#c14.
 
-Selecting site
-^^^^^^^^^^
-You can manage all redirects with the redirect backend module in TYPO3. If you have a multisite environment than you have to select
-the site before adding a redirect. The selected site is the base url of the actual redirect.
+is the base
+url of the actual redirect.
 
 .. figure:: ../Images/selectSite62.PNG
     :alt: Select site
@@ -89,7 +92,7 @@ The following table describes the main fields of a redirect record.
     incoming request *"http://www.domain.com/about"*.
 
    :Types Redirect:
-	Internal page, external url and internal file
+	Internal page, external url and internal file.
 
 
  - :Field:
@@ -100,17 +103,17 @@ The following table describes the main fields of a redirect record.
     (Temporary redirect).
 
    :Types Redirect:
-   	Internal page, external url and internal file
+   	Internal page, external url and internal file.
 
 
  - :Field:
     **Total hits**
 
    :Description:
-    Total hits of the redirect.
+    Redirect hit counter number. This is not editable.
 
    :Types Redirect:
-   	Internal page, external url and internal file
+   	Internal page, external url and internal file.
 
 
  - :Field:
@@ -128,7 +131,7 @@ The following table describes the main fields of a redirect record.
 	**Addtional params**
 
    :Description:
-	Add additional params to the internal page for linking inside a part of a site for example
+	Add additional params to the internal page for anchor linking. For example *"#c8"*
 
    :Types Redirect:
 	Internal page
@@ -138,7 +141,7 @@ The following table describes the main fields of a redirect record.
 	**External url**
 
    :Description:
-	The external url to redirect to
+	The external url to redirect to. For example *"http://www.google.com"*.
 
    :Types Redirect:
 	External url
@@ -148,7 +151,7 @@ The following table describes the main fields of a redirect record.
 	**Internal file**
 
    :Description:
-	The internal file to redirect to
+	The internal file from FAL to redirect to. It saves the file reference id.
 
    :Types Redirect:
 	Internal file

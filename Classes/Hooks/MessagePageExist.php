@@ -24,7 +24,7 @@ namespace ROQUIN\RoqRedirect\Hooks;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use ROQUIN\RoqRedirect\Utility\RedirectType;
+use ROQUIN\RoqRedirect\Utility\Http;
 
 /**
  * Hook into BE after managing redirects and check if the source of the redirect already exist
@@ -62,7 +62,7 @@ class MessagePageExist
             if ($GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']) {
                 $url = $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL'] . $fieldArray['redirect_url'];
 
-                if ($this->urlAlreadyExist($url) == TRUE) {
+                if (Http::urlAlreadyExist($url) == TRUE) {
                     $this->setFlashMessage(
                         $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.head.urlAlreadyExist'),
                         $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.messagePart1.urlAlreadyExist') .
@@ -97,31 +97,6 @@ class MessagePageExist
         );
         \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);
         $message->render();
-    }
-
-    /**
-     * Check if url already exist
-     *
-     * @param $url
-     * @return bool
-     */
-    protected function urlAlreadyExist($url) {
-        // Setup curl for request with only headers
-        $curlHandle = curl_init($url);
-        curl_setopt($curlHandle, CURLOPT_NOBODY, true);
-        curl_exec($curlHandle);
-        $code = curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-
-        // Check if http code is ok
-        if ($code == 200) {
-            $status = true;
-        } else {
-            $status = false;
-        }
-
-        curl_close($curlHandle);
-
-        return $status;
     }
 }
 

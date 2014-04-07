@@ -99,7 +99,7 @@ class TableListViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBacken
             $storagePid             = $frameworkConfiguration['persistence']['storagePid'];
         }
 
-        $dblist->start($storagePid, $tableName, (integer)\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('pointer'), $filter, $levels, $recordsPerPage);
+        $dblist->start($storagePid, $tableName, (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('pointer'), $filter, $levels, $recordsPerPage);
         $dblist->allFields     = TRUE;
         $dblist->displayFields = FALSE;
         $dblist->setFields     = array($tableName => $fieldList);

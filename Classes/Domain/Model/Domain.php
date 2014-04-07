@@ -37,14 +37,14 @@ class Domain extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * domainName
      *
-     * @var \string
+     * @var string
      */
     protected $domainName;
 
     /**
      * Returns the domainName
      *
-     * @return \string $domainName
+     * @return string $domainName
      */
     public function getDomainName() {
         return $this->domainName;
@@ -53,7 +53,7 @@ class Domain extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the domainName
      *
-     * @param \string $domainName
+     * @param string $domainName
      * @return void
      */
     public function setDomainName($domainName) {

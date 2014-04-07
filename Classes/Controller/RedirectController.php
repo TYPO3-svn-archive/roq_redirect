@@ -24,14 +24,10 @@ namespace ROQUIN\RoqRedirect\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\TimeTracker\TimeTracker;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\CommandController;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use ROQUIN\RoqRedirect\Domain\Repository;
+use ROQUIN\RoqRedirect\Domain\Model\Redirect;
 use ROQUIN\RoqRedirect\Utility\Http;
-use ROQUIN\RoqRedirect\Utility\RedirectType;
-use ROQUIN\RoqRedirect\Utility\File;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  *
@@ -43,10 +39,15 @@ use ROQUIN\RoqRedirect\Utility\File;
 class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
+    const INTERNAL_PAGE = 0;
+    const EXTERNAL_URL  = 1;
+    const INTERNAL_FILE = 2;
+
     /**
      * domainRepository
      *
      * @var \ROQUIN\RoqRedirect\Domain\Repository\DomainRepository
+     * @inject
      */
     protected $domainRepository;
 
@@ -68,9 +69,9 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * Inject repositories
      */
     public function injectRepositories() {
-        $this->domainRepository   = new \ROQUIN\RoqRedirect\Domain\Repository\DomainRepository();
-        $this->redirectRepository = new \ROQUIN\RoqRedirect\Domain\Repository\RedirectRepository();
-        $this->fileRepository     = new \ROQUIN\RoqRedirect\Domain\Repository\FileRepository();
+        $this->domainRepository   = new Repository\DomainRepository();
+        $this->redirectRepository = new Repository\RedirectRepository();
+        $this->fileRepository     = new Repository\FileRepository();
     }
 
     /**
@@ -80,9 +81,9 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     public function doRedirectIfExist() {
         $this->injectRepositories();
 
-        $requestUrl = trim(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_SCRIPT'));
-
-        $redirect = ($this->redirectAvailable($requestUrl)) ? $this->redirectAvailable($requestUrl) : NULL;
+        // Get redirect if available
+        $requestUrl = trim(GeneralUtility::getIndpEnv('TYPO3_SITE_SCRIPT'));
+        $redirect = Redirect::redirectAvailable($requestUrl, $this->domainRepository, $this->redirectRepository);
 
         // Redirect available
         if ($redirect != NULL) {
@@ -93,110 +94,19 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
                 switch ($redirect->getType()) {
                     // Internal page
-                    case RedirectType::INTERNAL_PAGE:
-                        $this->redirectToInternalPage($redirect);
+                    case self::INTERNAL_PAGE:
+                        $redirect->redirectToInternalPage($redirect);
+                        break;
                     // External url
-                    case RedirectType::EXTERNAL_URL:
+                    case self::EXTERNAL_URL:
                         Http::redirect($redirect->getExternalUrl(), $redirect->getHttpCode());
+                        break;
                     // Internal file
-                    case RedirectType::INTERNAL_FILE:
-                        $this->redirectToInternalFile($redirect);
+                    case self::INTERNAL_FILE:
+                        $redirect->redirectToInternalFile($redirect, $this->fileRepository);
                         break;
                 }
             }
-        }
-    }
-
-    /**
-     * Get the matching redirect from request if exist
-     *
-     * @param   string $requestUrl
-     * @return  NULL|\ROQUIN\RoqRedirect\Domain\Model\Redirect
-     */
-    public function redirectAvailable($requestUrl) {
-        $redirect      = NULL;
-        $requestDomain = $_SERVER['SERVER_NAME'];
-
-        // Get the current domain record if exist
-        $currentDomainRecord = $this->domainRepository->getCurrentDomain($requestDomain);
-
-        // search for a matching redirect if the current domain exist
-        if (is_array($currentDomainRecord)) {
-
-            /** @var \ROQUIN\RoqRedirect\Domain\Model\Domain $domain */
-            $domain = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                'ROQUIN\\RoqRedirect\\Domain\\Model\\Domain'
-            );
-            $domain->setPid($currentDomainRecord['pid']);
-            $domain->setDomainName($currentDomainRecord['domainName']);
-
-            // Get the current domain record if exist
-            $redirectRecord = $this->redirectRepository->getRedirectByDomain($domain, $requestUrl);
-
-            if (is_array($redirectRecord)) {
-                /** @var \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect */
-                $redirect = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                    'ROQUIN\\RoqRedirect\\Domain\\Model\\Redirect'
-                );
-                $redirect->setPid($redirectRecord['pid']);
-                $redirect->setHttpCode($redirectRecord['http_code']);
-                $redirect->setRedirectTo($redirectRecord['redirect_to']);
-                $redirect->setRedirectUrl($redirectRecord['redirect_url']);
-                $redirect->setLanguageUid($redirectRecord['sys_language_uid']);
-                $redirect->setAdditionalUrl($redirectRecord['additional_url']);
-                $redirect->setExternalUrl($redirectRecord['external_url']);
-                $redirect->setInternalFile($redirectRecord['internal_file']);
-                $redirect->setType($redirectRecord['type']);
-                $redirect->setId($redirectRecord['uid']);
-            }
-        }
-
-        return $redirect;
-    }
-
-    /**
-     * Redirect to internal page
-     *
-     * @param   \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect   redirect object
-     */
-    public function redirectToInternalPage($redirect) {
-        // Fake a TS FE Controller to use typolink url
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            'ROQUIN\\RoqRedirect\\Utility\\FakeTypoScriptFrontendController'
-        );
-
-        // Create a typolink url
-        $url = $GLOBALS['TSFE']->cObj->typoLink_URL(
-            array(
-                'parameter'        => (int)$redirect->getRedirectTo(),
-                'additionalParams' => '&L=' . $redirect->getLanguageUid()
-            )
-        );
-
-        // Add additional data to the typolink url for linking inside a html page
-        if ($redirect->getAdditionalUrl()) {
-            $url .= $redirect->getAdditionalUrl();
-        }
-
-        // Do the actual redirect
-        Http::redirect($url, $redirect->getHttpCode());
-    }
-
-    /**
-     * Redirect to
-     *
-     * @param   \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect   redirect object
-     */
-    public function redirectToInternalFile($redirect) {
-        // Get the file record by redirect
-        $fileRecord = $this->fileRepository->getFileByRedirect($redirect);
-
-        if (is_array($fileRecord)) {
-            // Get the url of the file
-            $url = File::getUrl($fileRecord);
-
-            // Do the actual redirect
-            Http::redirect($url, $redirect->getHttpCode());
         }
     }
 }

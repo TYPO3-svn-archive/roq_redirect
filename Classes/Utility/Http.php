@@ -40,29 +40,23 @@ class Http
     const HTTP_STATUS_303 = 'HTTP/1.1 303 See Other';
     const HTTP_STATUS_307 = 'HTTP/1.1 307 Temporary Redirect';
 
+    const HTTP_STATUS_OK = 200;
+
     /**
      * Get the HTTP Status
      *
-     * @param int $httpStatus
+     * @param int $httpStatusCode
      * @return string $httpStatus
      */
-    public static function getHttpStatus($httpStatus = 301) {
-        switch ($httpStatus) {
-            case 301:
-                $httpStatus = self::HTTP_STATUS_301;
-                break;
-            case 302:
-                $httpStatus = self::HTTP_STATUS_302;
-                break;
-            case 303:
-                $httpStatus = self::HTTP_STATUS_303;
-                break;
-            case 307:
-                $httpStatus = self::HTTP_STATUS_307;
-                break;
-        }
+    public static function getHttpStatus($httpStatusCode = 301) {
+        $httpStatusArray = array(
+            301 => self::HTTP_STATUS_301,
+            302 => self::HTTP_STATUS_302,
+            303 => self::HTTP_STATUS_303,
+            307 => self::HTTP_STATUS_307
+        );
 
-        return $httpStatus;
+        return $httpStatusArray[$httpStatusCode];
     }
 
     /**
@@ -75,6 +69,31 @@ class Http
         header(Http::getHttpStatus($httpStatus));
         header('Location: ' . \TYPO3\CMS\Core\Utility\GeneralUtility::locationHeaderUrl($url));
         exit();
+    }
+
+    /**
+     * Check if url already exist
+     *
+     * @param $url
+     * @return bool
+     */
+    public static  function urlAlreadyExist($url) {
+        // Setup curl for request with only headers
+        $curlHandle = curl_init($url);
+        curl_setopt($curlHandle, CURLOPT_NOBODY, true);
+        curl_exec($curlHandle);
+        $code = curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
+
+        // Check if http code is ok
+        if ($code == self::HTTP_STATUS_OK) {
+            $status = true;
+        } else {
+            $status = false;
+        }
+
+        curl_close($curlHandle);
+
+        return $status;
     }
 }
 

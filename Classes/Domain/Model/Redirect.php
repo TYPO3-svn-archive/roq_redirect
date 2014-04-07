@@ -24,6 +24,10 @@ namespace ROQUIN\RoqRedirect\Domain\Model;
      *  This copyright notice MUST APPEAR in all copies of the script!
      ***************************************************************/
 
+use ROQUIN\RoqRedirect\Utility\Http;
+use ROQUIN\RoqRedirect\Utility\File;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  *
  *
@@ -37,14 +41,14 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * id
      *
-     * @var \int
+     * @var int
      */
     protected $id;
 
     /**
      * redirectUrl
      *
-     * @var \string
+     * @var string
      * @validate NotEmpty
      */
     protected $redirectUrl;
@@ -52,7 +56,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * redirectTo
      *
-     * @var \string
+     * @var string
      * @validate NotEmpty
      */
     protected $redirectTo;
@@ -60,14 +64,14 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * httpCode
      *
-     * @var \integer
+     * @var integer
      */
     protected $httpCode;
 
     /**
      * languageUid
      *
-     * @var \int
+     * @var int
      */
     protected $languageUid;
 
@@ -101,7 +105,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the id
      *
-     * @return \int $id
+     * @return int $id
      */
     public function getId() {
         return $this->id;
@@ -110,7 +114,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the id
      *
-     * @param \int $id
+     * @param int $id
      * @return void
      */
     public function setId($id) {
@@ -120,7 +124,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the redirectUrl
      *
-     * @return \string $redirectUrl
+     * @return string $redirectUrl
      */
     public function getRedirectUrl() {
         return $this->redirectUrl;
@@ -129,7 +133,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the redirectUrl
      *
-     * @param \string $redirectUrl
+     * @param string $redirectUrl
      * @return void
      */
     public function setRedirectUrl($redirectUrl) {
@@ -139,7 +143,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the redirectTo
      *
-     * @return \string $redirectTo
+     * @return string $redirectTo
      */
     public function getRedirectTo() {
         return $this->redirectTo;
@@ -148,7 +152,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the redirectTo
      *
-     * @param \string $redirectTo
+     * @param string $redirectTo
      * @return void
      */
     public function setRedirectTo($redirectTo) {
@@ -158,7 +162,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the httpCode
      *
-     * @return \integer $httpCode
+     * @return integer $httpCode
      */
     public function getHttpCode() {
         return $this->httpCode;
@@ -167,7 +171,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the httpCode
      *
-     * @param \integer $httpCode
+     * @param integer $httpCode
      * @return void
      */
     public function setHttpCode($httpCode) {
@@ -177,7 +181,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the languageUid
      *
-     * @return \int $languageUid
+     * @return int $languageUid
      */
     public function getLanguageUid() {
         return $this->languageUid;
@@ -186,7 +190,7 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the languageUid
      *
-     * @param \int $languageUid
+     * @param int $languageUid
      * @return void
      */
     public function setLanguageUid($languageUid) {
@@ -292,6 +296,104 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setInternalFile($internalFile) {
         $this->internalFile = $internalFile;
+    }
+
+    /**
+     * Get the matching redirect from request if exist
+     *
+     * @param   string $requestUrl
+     * @param   \ROQUIN\RoqRedirect\Domain\Repository\DomainRepository $domainRepository
+     * @param   \ROQUIN\RoqRedirect\Domain\Repository\RedirectRepository $redirectRepository
+     * @return  NULL|\ROQUIN\RoqRedirect\Domain\Model\Redirect
+     */
+    public static function redirectAvailable($requestUrl, $domainRepository, $redirectRepository) {
+        $redirect      = NULL;
+        $requestDomain = $_SERVER['SERVER_NAME'];
+
+        // Get the current domain record if exist
+        $currentDomainRecord = $domainRepository->getCurrentDomain($requestDomain);
+
+        // search for a matching redirect if the current domain exist
+        if (is_array($currentDomainRecord)) {
+
+            /** @var \ROQUIN\RoqRedirect\Domain\Model\Domain $domain */
+            $domain = GeneralUtility::makeInstance(
+                'ROQUIN\\RoqRedirect\\Domain\\Model\\Domain'
+            );
+            $domain->setPid($currentDomainRecord['pid']);
+            $domain->setDomainName($currentDomainRecord['domainName']);
+
+            // Get the current domain record if exist
+            $redirectRecord = $redirectRepository->getRedirectByDomain($domain, $requestUrl);
+
+            if (is_array($redirectRecord)) {
+
+                /** @var \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect */
+                $redirect = GeneralUtility::makeInstance(
+                    'ROQUIN\\RoqRedirect\\Domain\\Model\\Redirect'
+                );
+
+                $redirect->setPid($redirectRecord['pid']);
+                $redirect->setHttpCode($redirectRecord['http_code']);
+                $redirect->setRedirectTo($redirectRecord['redirect_to']);
+                $redirect->setRedirectUrl($redirectRecord['redirect_url']);
+                $redirect->setLanguageUid($redirectRecord['sys_language_uid']);
+                $redirect->setAdditionalUrl($redirectRecord['additional_url']);
+                $redirect->setExternalUrl($redirectRecord['external_url']);
+                $redirect->setInternalFile($redirectRecord['internal_file']);
+                $redirect->setType($redirectRecord['type']);
+                $redirect->setId($redirectRecord['uid']);
+            }
+        }
+
+        return $redirect;
+    }
+
+    /**
+     * Redirect to internal page
+     *
+     * @param   \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect   redirect object
+     */
+    public function redirectToInternalPage($redirect) {
+        // Fake a TS FE Controller to use typolink url
+        GeneralUtility::makeInstance(
+            'ROQUIN\\RoqRedirect\\Utility\\FakeTypoScriptFrontendController'
+        );
+
+        // Create a typolink url
+        $url = $GLOBALS['TSFE']->cObj->typoLink_URL(
+            array(
+                'parameter'        => (int)$redirect->getRedirectTo(),
+                'additionalParams' => '&L=' . $redirect->getLanguageUid()
+            )
+        );
+
+        // Add additional data to the typolink url for linking inside a html page
+        if ($redirect->getAdditionalUrl()) {
+            $url .= $redirect->getAdditionalUrl();
+        }
+
+        // Do the actual redirect
+        Http::redirect($url, $redirect->getHttpCode());
+    }
+
+    /**
+     * Redirect to
+     *
+     * @param   \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect   redirect object
+     * @param   \ROQUIN\RoqRedirect\Domain\Repository\FileRepository $fileRepository
+     */
+    public function redirectToInternalFile($redirect, $fileRepository) {
+        // Get the file record by redirect
+        $fileRecord = $fileRepository->getFileByRedirect($redirect);
+
+        if (is_array($fileRecord)) {
+            // Get the url of the file
+            $url = File::getUrl($fileRecord);
+
+            // Do the actual redirect
+            Http::redirect($url, $redirect->getHttpCode());
+        }
     }
 }
 
