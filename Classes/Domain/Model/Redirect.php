@@ -352,9 +352,9 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Redirect to internal page
      *
-     * @param   \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect   redirect object
      */
-    public function redirectToInternalPage($redirect) {
+    public function redirectToInternalPage() {
+
         // Fake a TS FE Controller to use typolink url
         GeneralUtility::makeInstance(
             'ROQUIN\\RoqRedirect\\Utility\\FakeTypoScriptFrontendController'
@@ -363,36 +363,35 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         // Create a typolink url
         $url = $GLOBALS['TSFE']->cObj->typoLink_URL(
             array(
-                'parameter'        => (int)$redirect->getRedirectTo(),
-                'additionalParams' => '&L=' . $redirect->getLanguageUid()
+                'parameter'        => (int)$this->getRedirectTo(),
+                'additionalParams' => '&L=' . $this->getLanguageUid()
             )
         );
 
         // Add additional data to the typolink url for linking inside a html page
-        if ($redirect->getAdditionalUrl()) {
-            $url .= $redirect->getAdditionalUrl();
+        if ($this->getAdditionalUrl()) {
+            $url .= $this->getAdditionalUrl();
         }
 
         // Do the actual redirect
-        Http::redirect($url, $redirect->getHttpCode());
+        Http::redirect($url, $this->getHttpCode());
     }
 
     /**
      * Redirect to
      *
-     * @param   \ROQUIN\RoqRedirect\Domain\Model\Redirect $redirect   redirect object
      * @param   \ROQUIN\RoqRedirect\Domain\Repository\FileRepository $fileRepository
      */
-    public function redirectToInternalFile($redirect, $fileRepository) {
+    public function redirectToInternalFile($fileRepository) {
         // Get the file record by redirect
-        $fileRecord = $fileRepository->getFileByRedirect($redirect);
+        $fileRecord = $fileRepository->getFileByRedirect($this);
 
         if (is_array($fileRecord)) {
             // Get the url of the file
             $url = File::getUrl($fileRecord);
 
             // Do the actual redirect
-            Http::redirect($url, $redirect->getHttpCode());
+            Http::redirect($url, $this->getHttpCode());
         }
     }
 }

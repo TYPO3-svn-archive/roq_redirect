@@ -14,8 +14,7 @@ What does it do?
 
 Backend module for managing redirects. This extension provides a backend module for managing redirects for
 multiple sites and languages. The extension hooks into a preprocess request and checks for a redirect record with the
-same url as the requested url. If a redirect record exist for this request, than the extension executes the actual
-redirect.
+same url as the requested url. A redirect will be initiated to the defined redirect destination if a redirect record exists for this request.
 
 .. figure:: ../Images/redirectModule62.PNG
     :alt: Redirect module

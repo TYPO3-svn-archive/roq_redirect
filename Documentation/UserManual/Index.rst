@@ -13,14 +13,13 @@ Target group: **Editors**
 
 Manage redirect records
 -----------
-Redirects are configurable with the redirect backend module in the TYPO3 backend. Just select the Redirects module in the backend of TYPO3. If
-you have a multisite environment than you will have multiple options of sites to select. Choose and select the site you want to add redirects
-to (see also image 2). The selected site is the base url of the redirect. For example: You select the site *"sub.patrick.typo62.lan"* and add
-a redirect of the type *"Internal Page"* with the same data as image 3 "Redrect type Internal Page" (see also image 3). The url
-http://sub.patrick.typo62.lan/custom will redirect to http://sub.patrick.typo62.lan/de/customizing.html#c14.
+Redirects are directly manageable in the TYPO3 backend menu with the redirect web module.
 
-is the base
-url of the actual redirect.
+If you have a multi-site environment you can specify redirect for multiple websites. In this case you can choose and select the site for which you want to add redirects.
+The selected site will be used as the base url for the redirect that you add. See Image 2: Select site.
+
+**Example:** If you select the site *"www.redirect.com"* and add a redirect of the type *"Internal Page"* (see Image 3) the
+url *"http://www.redirect.com/custom"* will redirect to *"http://www.redirect.com/de/customizing.html#c14"*.
 
 .. figure:: ../Images/selectSite62.PNG
     :alt: Select site
@@ -29,15 +28,13 @@ url of the actual redirect.
 
 **Image 2:** Select site
 
-Redirect record
-^^^^^^^^^^
-
-After selecting the site in the selectbox you can add, update and remove your redirects for a specific site. So you
-can redirect all incoming requests for a specific site to an internal page, external url or internal file. So the first thing
-you need to do is choose a redirect type.
+In the redirect module you can create three different redirect types: "Internal Page", "External url" and "Internal File".
+* **Internal Page:** redirect a url to an existing TYPO3 page (see Image 3)
+* **External url:** redirect to an external type (see Image 4)
+* **Internal File:** redirect to an existing internal file in the FAL (see image 5).
 
 Redirect type Internal Page
-""""""""""
+^^^^^^^^^^
 
 .. figure:: ../Images/internalPage62.PNG
     :alt: Redirect record internal page
@@ -47,7 +44,7 @@ Redirect type Internal Page
 **Image 3:** Redirect record internal page
 
 Redirect type External url
-""""""""""
+^^^^^^^^^^
 
 .. figure:: ../Images/externalUrl62.PNG
     :alt: Redirect record external url
@@ -57,7 +54,7 @@ Redirect type External url
 **Image 4:** Redirect record external url
 
 Redirect type Internal File
-""""""""""
+^^^^^^^^^^
 
 .. figure:: ../Images/internalFile62.PNG
     :alt: Redirect record internal file
@@ -69,7 +66,7 @@ Redirect type Internal File
 Redirect record fields
 -----------
 
-The following table describes the main fields of a redirect record.
+See the table below for an overview of all redirect record main fields:
 
 .. t3-field-list-table::
  :header-rows: 1

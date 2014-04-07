@@ -95,7 +95,7 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                 switch ($redirect->getType()) {
                     // Internal page
                     case self::INTERNAL_PAGE:
-                        $redirect->redirectToInternalPage($redirect);
+                        $redirect->redirectToInternalPage();
                         break;
                     // External url
                     case self::EXTERNAL_URL:
@@ -103,7 +103,7 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                         break;
                     // Internal file
                     case self::INTERNAL_FILE:
-                        $redirect->redirectToInternalFile($redirect, $this->fileRepository);
+                        $redirect->redirectToInternalFile($this->fileRepository);
                         break;
                 }
             }

@@ -35,12 +35,14 @@ namespace ROQUIN\RoqRedirect\Utility;
 class Http
 {
 
-    const HTTP_STATUS_301 = 'HTTP/1.1 301 Moved Permanently';
-    const HTTP_STATUS_302 = 'HTTP/1.1 302 Found';
-    const HTTP_STATUS_303 = 'HTTP/1.1 303 See Other';
-    const HTTP_STATUS_307 = 'HTTP/1.1 307 Temporary Redirect';
-
     const HTTP_STATUS_OK = 200;
+
+    public static $httpStatus = array(
+        301 => 'HTTP/1.1 301 Moved Permanently',
+        302 => 'HTTP/1.1 302 Found',
+        303 => 'HTTP/1.1 303 See Other',
+        307 => 'HTTP/1.1 307 Temporary Redirect'
+    );
 
     /**
      * Get the HTTP Status
@@ -49,14 +51,7 @@ class Http
      * @return string $httpStatus
      */
     public static function getHttpStatus($httpStatusCode = 301) {
-        $httpStatusArray = array(
-            301 => self::HTTP_STATUS_301,
-            302 => self::HTTP_STATUS_302,
-            303 => self::HTTP_STATUS_303,
-            307 => self::HTTP_STATUS_307
-        );
-
-        return $httpStatusArray[$httpStatusCode];
+        return self::$httpStatus[$httpStatusCode];
     }
 
     /**
@@ -65,7 +60,7 @@ class Http
      * @param   string $url
      * @param   string $httpStatus
      */
-    public static function redirect($url, $httpStatus = self::HTTP_STATUS_301) {
+    public static function redirect($url, $httpStatus = 'HTTP/1.1 301 Moved Permanently') {
         header(Http::getHttpStatus($httpStatus));
         header('Location: ' . \TYPO3\CMS\Core\Utility\GeneralUtility::locationHeaderUrl($url));
         exit();

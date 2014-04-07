@@ -64,21 +64,14 @@ class File
         // Get the storage record configuration from xml
         $configuration = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->convertFlexFormDataToConfigurationArray($storageRecord['configuration']);
 
-        $absoluteBasePath = $configuration['basePath'];
+        $storageBaseUrl = $configuration['basePath'];
 
-        // Set the absolute base path
-        if ($configuration['pathType'] === 'relative') {
-            $absoluteBasePath = PATH_site . $absoluteBasePath;
+        // Set the absolute base path to relative
+        if ($configuration['pathType'] === 'absolute') {
+            $storageBaseUrl = substr($storageBaseUrl, strlen(PATH_site));
         }
 
-        // Set the base url of the storage
-        if (\TYPO3\CMS\Core\Utility\GeneralUtility::isFirstPartOfStr($absoluteBasePath, PATH_site)) {
-            $baseUrl = substr($absoluteBasePath, strlen(PATH_site));
-        } elseif (isset($configuration['baseUri']) && \TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl($configuration['baseUri'])) {
-            $baseUrl = rtrim($configuration['baseUri'], '/') . '/';
-        }
-
-        return $baseUrl;
+        return $storageBaseUrl;
     }
 }
 
