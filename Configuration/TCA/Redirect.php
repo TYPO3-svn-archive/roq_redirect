@@ -110,7 +110,7 @@ $TCA['tx_roqredirect_domain_model_redirect'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required,nospace'
+				'eval' => 'trim,required,nospace,uniqueInPid'
 			),
 		),
 		'redirect_to' => array(
@@ -216,8 +216,7 @@ $TCA['tx_roqredirect_domain_model_redirect'] = array(
                             'hide' => FALSE,
                         ),
                     ),
-                ),
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+                )
             ),
         ),
 	),

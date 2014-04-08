@@ -72,7 +72,7 @@ class Http
      * @param $url
      * @return bool
      */
-    public static  function urlAlreadyExist($url) {
+    public static function urlAlreadyExist($url) {
         // Setup curl for request with only headers
         $curlHandle = curl_init($url);
         curl_setopt($curlHandle, CURLOPT_NOBODY, true);
