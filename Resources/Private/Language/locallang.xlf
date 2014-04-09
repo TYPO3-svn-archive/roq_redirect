@@ -43,6 +43,12 @@
             <trans-unit id="warning.message.noBaseUrl">
                 <source>No BaseURL defined</source>
             </trans-unit>
+            <trans-unit id="warning.head.externalUrlNotExist">
+                <source>External url</source>
+            </trans-unit>
+            <trans-unit id="warning.message.externalUrlNotExist">
+                <source>The given external url doesn't exist or is a redirect itself. Please change the external url.</source>
+            </trans-unit>
 
 		</body>
 	</file>

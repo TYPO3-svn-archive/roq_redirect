@@ -82,29 +82,31 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $this->injectRepositories();
 
         // Get redirect if available
-        $requestUrl = trim(GeneralUtility::getIndpEnv('TYPO3_SITE_SCRIPT'));
+        $requestUrl = trim(urldecode(GeneralUtility::getIndpEnv('TYPO3_SITE_SCRIPT')));
         $redirect = Redirect::redirectAvailable($requestUrl, $this->domainRepository, $this->redirectRepository);
 
-        // Redirect available
-        if ($redirect != NULL) {
-            // Exclude requests with method head used for checking url
-            if ($GLOBALS['_SERVER']['REQUEST_METHOD'] !== 'HEAD') {
-                // Update the visited redirect with +1
-                $this->redirectRepository->updateCounter($redirect);
+        // Redirect available and there is a redirect source
+        if ($redirect instanceof Redirect) {
+            if($redirect->getRedirectUrl()){
+                // Exclude requests with method head used for checking url
+                if ($GLOBALS['_SERVER']['REQUEST_METHOD'] !== 'HEAD') {
+                    // Update the visited redirect with +1
+                    $this->redirectRepository->updateCounter($redirect);
 
-                switch ($redirect->getType()) {
-                    // Internal page
-                    case self::INTERNAL_PAGE:
-                        $redirect->redirectToInternalPage();
-                        break;
-                    // External url
-                    case self::EXTERNAL_URL:
-                        Http::redirect($redirect->getExternalUrl(), $redirect->getHttpCode());
-                        break;
-                    // Internal file
-                    case self::INTERNAL_FILE:
-                        $redirect->redirectToInternalFile($this->fileRepository);
-                        break;
+                    switch ($redirect->getType()) {
+                        // Internal page
+                        case self::INTERNAL_PAGE:
+                            $redirect->redirectToInternalPage();
+                            break;
+                        // External url
+                        case self::EXTERNAL_URL:
+                            Http::redirect($redirect->getExternalUrl(), $redirect->getHttpCode());
+                            break;
+                        // Internal file
+                        case self::INTERNAL_FILE:
+                            $redirect->redirectToInternalFile($this->fileRepository);
+                            break;
+                    }
                 }
             }
         }

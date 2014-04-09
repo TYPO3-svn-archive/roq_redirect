@@ -62,6 +62,7 @@ class MessagePageExist
             if ($GLOBALS['TSFE']->tmpl->setup['config.']['baseURL']) {
                 $url = $GLOBALS['TSFE']->tmpl->setup['config.']['baseURL'] . $fieldArray['redirect_url'];
 
+                // Checks if source url already exist
                 if (Http::urlAlreadyExist($url) == TRUE) {
                     $this->setFlashMessage(
                         $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.head.urlAlreadyExist'),
@@ -69,13 +70,29 @@ class MessagePageExist
                             $url . $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.messagePart2.urlAlreadyExist'),
                         \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
                     );
-                };
+                }
             } else {
                 $this->setFlashMessage(
                     $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.head.noBaseUrl'),
                     $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.message.noBaseUrl'),
                     \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
                 );
+            }
+
+            // Checks if the external url field of the type external url starts with http:// or https:// or else add http://
+            if($fieldArray['type'] == constant('ROQUIN\RoqRedirect\Controller\RedirectController::EXTERNAL_URL') && $fieldArray['external_url']) {
+                if (!preg_match("/^(http|https):\/\/(.*?)$/i", strtolower($fieldArray['external_url']))) {
+                    $fieldArray['external_url'] = 'http://' . $fieldArray['external_url'];
+                }
+
+                // Give a message when url doesn't return a 200 http status in the header
+                if(!Http::urlAlreadyExist($fieldArray['external_url'])) {
+                    $this->setFlashMessage(
+                        $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.head.externalUrlNotExist'),
+                        $GLOBALS['LANG']->sL('LLL:EXT:roq_redirect/Resources/Private/Language/locallang.xlf:warning.message.externalUrlNotExist'),
+                        \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
+                    );
+                }
             }
         }
     }

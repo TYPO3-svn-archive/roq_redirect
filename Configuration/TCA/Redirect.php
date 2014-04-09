@@ -11,14 +11,18 @@ $TCA['tx_roqredirect_domain_model_redirect'] = array(
 	'types' => array(
 		'0' => array('showitem' => 'redirect_url;;paletteCore, redirect_to;;paletteRedirectToInternalPage, http_code
 		    ,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
-        '1' => array('showitem' => 'redirect_url;;paletteCore, external_url, http_code
+        '1' => array('showitem' => 'redirect_url;;paletteCoreNoLanguage, external_url, http_code
             ,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
-        '2' => array('showitem' => 'redirect_url;;paletteCore, internal_file, http_code
+        '2' => array('showitem' => 'redirect_url;;paletteCoreNoLanguage, internal_file, http_code
             ,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
         'paletteCore' => array(
             'showitem' => 'hidden;;1, type, sys_language_uid;;;;1-1-1, counter,',
+            'canNotCollapse' => TRUE
+        ),
+        'paletteCoreNoLanguage' => array(
+            'showitem' => 'hidden;;1, type, counter,',
             'canNotCollapse' => TRUE
         ),
         'paletteRedirectToInternalPage' => array(

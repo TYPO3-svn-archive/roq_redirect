@@ -24,6 +24,18 @@
                 <source>Choose the type of the redirect</source>
                 <target>Kies type redirect</target>
             </trans-unit>
+            <trans-unit id="external_url.description">
+                <source>Redirect to an external url. Example: http://www.redirect.com</source>
+                <target>Redirect naar een externe url. Voorbeeld: http://www.redirect.com</target>
+            </trans-unit>
+            <trans-unit id="internal_file.description">
+                <source>Redirect to a file</source>
+                <target>Redirect naar een bestand</target>
+            </trans-unit>
+            <trans-unit id="counter.description">
+                <source>Counter of redirect</source>
+                <target>Teller redirect</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

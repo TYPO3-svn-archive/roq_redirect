@@ -56,6 +56,14 @@
                 <source>No BaseURL defined</source>
                 <target>Geen BaseURL gedefinieerd</target>
             </trans-unit>
+            <trans-unit id="warning.head.externalUrlNotExist">
+                <source>External url</source>
+                <target>Externe url</target>
+            </trans-unit>
+            <trans-unit id="warning.message.externalUrlNotExist">
+                <source>The given external url doesn't exist or is a redirect itself. Please change the external url.</source>
+                <target>De opgegeven externe url bestaat niet of is zelf al een redirect. Wijzig de externe url in een bestaande url.</target>
+            </trans-unit>
 
 		</body>
 	</file>

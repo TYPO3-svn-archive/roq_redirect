@@ -354,7 +354,6 @@ class Redirect extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      */
     public function redirectToInternalPage() {
-
         // Fake a TS FE Controller to use typolink url
         GeneralUtility::makeInstance(
             'ROQUIN\\RoqRedirect\\Utility\\FakeTypoScriptFrontendController'
